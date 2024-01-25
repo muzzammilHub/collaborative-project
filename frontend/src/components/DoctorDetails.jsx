@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import axios from "axios"
+import PaymentGateway from './PaymentGateway'
 import ChatApp from './ChatApp'
 import ChatComponent from './ChatComponent'
 import AppointmentButton from './AppointmentButton'
@@ -9,7 +10,6 @@ import Map from './Map'
 import SchoolIcon from '@mui/icons-material/School'
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital'
 import PinDropIcon from '@mui/icons-material/PinDrop'
-
 
 
 const DoctorDetails = () => {
@@ -52,6 +52,28 @@ const DoctorDetails = () => {
     }
 
   return (
+    <div>
+        <div className='flex border p-4 rounded-md shadow-md bg-white'>
+    <div className='mr-4 w-[50%]'>
+        <img
+            src={doctor?.avatar}
+            className='h-[21.8rem] mx-auto'
+            alt='Doctor Avatar'
+        />
+    </div>
+    <div className='w-[50%]  my-20'>
+        <p className='text-4xl font-semibold text-gray-800 mb-2'>
+            {doctor?.firstName} {doctor?.lastName}
+        </p>
+        <p className='text-gray-600 text-lg'>{doctor?.email}</p>
+        <p className='text-blue-500 font-semibold'>{doctor?.speciality}</p>
+        <p className='text-yellow-500'>⭐ Rating {doctor?.rating} out of 5</p>
+        <p className='text-gray-700'>Preferred Language: <span className='text-orange-500'>English, Hindi</span></p>
+    </div>
+    </div>
+    <div>
+        <PaymentGateway/>
+    </div>
     <div className='pl-[3rem] pr-[3rem] bg-gray-400 h-auto'>
         <div className='shadow-2xl bg-white h-auto'>
         <div className='flex  p-4'>
