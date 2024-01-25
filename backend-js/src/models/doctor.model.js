@@ -52,14 +52,13 @@ const doctorSchema = new Schema({
         required: true,
         trim: true
     },
-    educationHistory:[{
-        type: String,
-        required: true
-    }],
-    workExperience: {
+    educationHistory:{
         type: String,
         required: true
     },
+    workExperience: [{
+        type: String
+    }],
     avatar:{
         type: String //cloudinary url
     },

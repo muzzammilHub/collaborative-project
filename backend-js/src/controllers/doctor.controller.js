@@ -3,8 +3,10 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js"
 
 const doctorRegisteration = async(req, res)=>{
     try {
-        
+
         const { firstName, lastName, email, speciality, gender, dob, phoneNumber, clinicAddress, pinCode, state, country, educationHistory, workExperience, rating, countryCode } = req.body
+
+        const workExperienceArray = workExperience.split("\n")
 
         if(
             [firstName, lastName, email, speciality].some( (field) => 
@@ -56,7 +58,8 @@ const doctorRegisteration = async(req, res)=>{
             pinCode, 
             state, 
             country, 
-            educationHistory, workExperience, 
+            educationHistory,
+            workExperience: workExperienceArray, 
             rating
         })
 
