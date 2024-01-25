@@ -1,9 +1,21 @@
 import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
+import { createServer } from "http"
 
 
 const app = express()
+const server = createServer(app)
+
+// import chatSocket
+import { chatSocket } from "./utils/chatsocket.js"
+chatSocket(server)
+
+// import videoSocket
+import { videoSocket } from "./utils/videosocket.js"
+videoSocket(server)
+
+
 
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
@@ -22,4 +34,4 @@ app.use("/api/v1/user", diseaseRouter)
 app.use("/api/v1/doctor", doctorRouter)
 
 
-export {app}
+export {app, server}

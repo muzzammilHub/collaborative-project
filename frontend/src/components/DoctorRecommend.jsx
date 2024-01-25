@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import InfoIcon from '@mui/icons-material/Info';
 import { Link } from 'react-router-dom';
 
+
 const DoctorRecommend = () => {
 
     const doctorList = useSelector((store)=>store?.doctor)
@@ -33,8 +34,6 @@ const DoctorRecommend = () => {
     </div>
   ))}
 </div>
-
-
   )
 }
 
