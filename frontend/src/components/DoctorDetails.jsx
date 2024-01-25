@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import axios from "axios"
+import PaymentGateway from './PaymentGateway'
 
 const DoctorDetails = () => {
     const {id} = useParams()
@@ -47,6 +48,9 @@ const DoctorDetails = () => {
         <p className='text-yellow-500'>⭐ Rating {doctor?.rating} out of 5</p>
         <p className='text-gray-700'>Preferred Language: <span className='text-orange-500'>English, Hindi</span></p>
     </div>
+    </div>
+    <div>
+        <PaymentGateway/>
     </div>
     </div>
   )
