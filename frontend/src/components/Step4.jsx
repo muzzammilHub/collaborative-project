@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material';
 
 
-const Step2 = ({ formData, setFormData, nextStep, prevStep }) => {
+const Step4 = ({ formData, setFormData, nextStep, prevStep }) => {
     console.log(formData)
     const handleChange = (e) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -10,31 +10,22 @@ const Step2 = ({ formData, setFormData, nextStep, prevStep }) => {
     return (
         <div>
         <div className='w-[60rem] flex justify-center items-center mt-[10rem] pt-5 pb-5 pr-5 pl-4 bg-gray-300 mx-auto'>  
-       <h2 className="w-[30rem] text-4xl mr-[1rem] text-center text-blue-800">Write email, phone number?</h2>
+       <h2 className="w-[30rem] text-4xl mr-[1rem] text-center text-blue-800">Write about your current health issue.</h2>
        <form className="space-y-4 w-[30rem]">
          <div>
          <TextField
            id="filled-basic"
            required
-           label="Email"
+           label="Health"
            variant="outlined"
-           name="email"
-           value={formData.email || ''}
+           name="health"
+           value={formData.health || ''}
            onChange={handleChange}
            className="form-input mt-1 block w-full"
-           />
-           
+           /> 
          </div>
-   
          <div>
-         <input
-            className="appearance-none block w-full bg-gray-300 text-black border border-gray-400 rounded py-4 px-4 leading-tight focus:outline-none focus:bg-gray-300 focus:border-sky-700 placeholder:text-gray-700"
-            placeholder="Type phone no..."
-            type="tel"
-            name="phoneNo"
-            value={formData.phoneNo || ""}
-            onChange={handleChange}
-        />
+            <p>Available time slot</p>
          </div>
          <div className='flex justify-between'>
             <button
@@ -58,4 +49,4 @@ const Step2 = ({ formData, setFormData, nextStep, prevStep }) => {
     );
   }
 
-  export default Step2
+  export default Step4

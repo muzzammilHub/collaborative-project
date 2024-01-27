@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Step1 from './Step1';
 import Step2 from './Step2';
+import Step3 from './Step3';
 
 const Appointment = () => {
     
@@ -19,7 +20,7 @@ const Appointment = () => {
       <div>
         {currentStep === 1 && <Step1 formData={formData} setFormData={setFormData} nextStep={nextStep} />}
         {currentStep === 2 && <Step2 formData={formData} setFormData={setFormData} nextStep={nextStep} prevStep={prevStep} />}
-        {/* Add more conditions for additional steps */}
+        {currentStep === 3 && <Step3 formData={formData} setFormData={setFormData} nextStep={nextStep} prevStep={prevStep} />}
       </div>
     );
 }
