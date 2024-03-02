@@ -7,7 +7,7 @@ const doctorSlice = createSlice({
     },
     reducers:{
         addDoctor: (state, action)=>{
-            state.action = action.payload
+            state.doctor = action.payload
         },
         removeDoctor: (state, action)=>{
             state.doctor = null

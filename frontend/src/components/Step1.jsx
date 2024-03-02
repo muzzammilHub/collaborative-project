@@ -53,21 +53,18 @@ const Step1 = ({ formData, setFormData, nextStep }) => {
       </div>
 
       <div>
-        <BasicDateField
+        {/* <BasicDateField
         formData={formData}
         setFormData={setFormData}
-        />
-      {/* <DateField label="Basic date field" /> */}
-        {/* <label className="block mb-2">
-          <span className="text-gray-700">Date of Birth:</span>
+        /> */}
           <input
+            placeholder='DOB'
             type="date"
             name="dob"
             value={formData.dob || ''}
             onChange={handleChange}
-            className="form-input mt-1 block w-full"
+            className="appearance-none block w-full bg-gray-300 text-black border border-gray-400 rounded py-4 px-4 leading-tight focus:outline-none focus:bg-gray-300 focus:border-sky-700 placeholder:text-gray-700"
           />
-        </label> */}
       </div>
       <div>
       <InputLabel id="demo-simple-select-label">Gender</InputLabel>
@@ -76,7 +73,6 @@ const Step1 = ({ formData, setFormData, nextStep }) => {
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={formData.gender || ''}
-        label="Gender"
         name="gender"
         onChange={handleChange}
         className="form-input mt-1 block w-full"

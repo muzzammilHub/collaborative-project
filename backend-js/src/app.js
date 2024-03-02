@@ -12,8 +12,8 @@ import { chatSocket } from "./utils/chatsocket.js"
 chatSocket(server)
 
 // import videoSocket
-import { videoSocket } from "./utils/videosocket.js"
-videoSocket(server)
+// import { videoSocket } from "./utils/videosocket.js"
+// videoSocket(server)
 
 
 
@@ -27,10 +27,10 @@ app.use(express.urlencoded({extended: true}))
 app.use(cookieParser())
 
 //import routes
-import diseaseRouter from "./routes/disease.routes.js"
+import userRouter from "./routes/user.routes.js"
 import doctorRouter from "./routes/doctor.routes.js"
 
-app.use("/api/v1/user", diseaseRouter)
+app.use("/api/v1/user", userRouter)
 app.use("/api/v1/doctor", doctorRouter)
 
 

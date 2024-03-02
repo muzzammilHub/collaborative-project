@@ -20,7 +20,7 @@ const Appointment = () => {
       <div>
         {currentStep === 1 && <Step1 formData={formData} setFormData={setFormData} nextStep={nextStep} />}
         {currentStep === 2 && <Step2 formData={formData} setFormData={setFormData} nextStep={nextStep} prevStep={prevStep} />}
-        {currentStep === 3 && <Step3 formData={formData} setFormData={setFormData} nextStep={nextStep} prevStep={prevStep} />}
+        {currentStep === 3 && <Step3 formData={formData} setFormData={setFormData}  prevStep={prevStep} />}
       </div>
     );
 }

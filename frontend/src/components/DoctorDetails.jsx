@@ -42,7 +42,7 @@ const DoctorDetails = () => {
 
     const {doctor} = doctorDetail
 
-    const education = doctor?.educationHistory?.split(",")
+    const education = doctor?.educationHistory
     console.log(education)
 
     const handleClick = ()=>{
@@ -72,7 +72,7 @@ const DoctorDetails = () => {
         </div>
         <div className="p-4 ">
             <h2 className="text-xl font-semibold mb-4 text-center">Education <SchoolIcon className='text-blue-800'/></h2>
-            <div className="flex overflow-x-auto space-x-4">
+            <div className="flex overflow-x-auto space-x-4 justify-center items-center">
                 {education?.map((degree, index) => (
                 <div key={index} className="p-2 bg-white border border-gray-300 rounded-md">
                     {degree}
@@ -116,7 +116,7 @@ const DoctorDetails = () => {
             {!openChat && <div
             className='m-4' 
             >  
-                <AppointmentButton />
+                <AppointmentButton id={id}/>
             </div>}
         </div>
         </div>
