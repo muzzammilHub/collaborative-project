@@ -42,8 +42,8 @@ const Feature = () => {
                     <p>Messaging</p>
                   </div>
                   <div className='pr-4 pl-4'>
-                    <img className='h-[5rem]' src='https://cdn-icons-png.flaticon.com/512/8976/8976784.png'/>
-                    <p>Messaging</p>
+                    <img className='h-[5rem] ml-4' src='https://cdn-icons-png.flaticon.com/512/8976/8976784.png'/>
+                    <p>Video Consultant</p>
                   </div>
                 </div>
               </div>

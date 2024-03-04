@@ -13,6 +13,8 @@ import UserLogin from './components/UserLogin'
 import DoctorPannel from './components/DoctorPannel'
 import DoctorMeet from './components/DoctorMeet'
 import DoctorList from './components/DoctorList'
+import VideoAppComponent from './components/VideoAppComponent'
+import FindDoctor from './components/FindDoctor'
 
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
           <Route path='/doctor-login' element={<DoctorLogin/>}></Route>
           <Route path='/doctor-appointment' element={<DoctorMeet/>}></Route>
           <Route path='/doctors' element={<DoctorList/>}></Route>
+          <Route path='/video-consultant' element={<VideoAppComponent/>}></Route>
+          <Route path='/find-doctor' element={<FindDoctor/>}></Route>
         </Routes>
       </BrowserRouter>
   )
