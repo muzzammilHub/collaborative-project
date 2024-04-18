@@ -14,7 +14,7 @@ const VideoAppComponent = () => {
           <div className=' mt-10'>
             <Link 
               className='px-4 py-2 bg-pink-700 text-white rounded-md hover:bg-pink-400'
-              to='/book-appointment'
+              to='/doctors'
             >
               Consult
             </Link>

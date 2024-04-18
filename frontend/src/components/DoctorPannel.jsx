@@ -2,8 +2,13 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {Link} from "react-router-dom"
 import LinkIcon from '@mui/icons-material/Link';
+import Heading from './Heading';
+import { useDispatch } from 'react-redux';
+import { loadLoginDoctor } from '../actions/loadDoctor';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const DoctorPannel = () => {
+    const dispatch = useDispatch()
     const [appointments, setAppointments] = useState({})
 
     const getAllAppointment = async()=>{
@@ -14,6 +19,8 @@ const DoctorPannel = () => {
                     "Authorization": `Bearer ${localStorage.getItem("doctorToken")}`
                 }
             })
+
+            console.log("data", data)
 
             const {filteredData} = data
 
@@ -26,9 +33,8 @@ const DoctorPannel = () => {
 
     useEffect(()=>{
         getAllAppointment()
-    },[])
-
-    console.log("**********",appointments)
+        dispatch(loadLoginDoctor())
+    },[dispatch])
 
     const getAge = (dob)=>{
         const dobArray = dob.split("-")
@@ -54,11 +60,19 @@ const DoctorPannel = () => {
         return age
 
     }
-    
+
+    const handleAppointmentDelete = async(id)=>{
+        console.log("*********",id)
+        const {data} = await axios.post(`http://127.0.0.1:4000/api/v1/user/delete?id=${id}`)
+
+        console.log(data)
+        getAllAppointment()
+    }
 
   return (
     <div>
-        <div>
+        <Heading/>
+        <div className='mt-2'>
             <ul
             className="flex  p-4 mb-4 bg-slate-200 ">
             <div className='w-[14rem]'><li className=' font-bold'>Name</li></div>
@@ -70,18 +84,23 @@ const DoctorPannel = () => {
             <div className='mr-10 ml-[2.7rem]'><li className='font-bold'>Country</li></div>
             </ul>
         </div>
-        <div>{
-          appointments.length > 0 && appointments.map((appointment, index)=>(
+        <div>
+            { appointments.length >=0 && appointments.map((appointment, index)=>(
                 
-                <ul className='flex p-4'>
+                <ul key={index} className='flex p-4'>
                     <li className='w-[10rem]'>{appointment.firstName} {appointment.lastName}</li>
                     <li className='w-[5rem] ml-[7rem]'>{appointment.gender}</li>
                     <li className='w-[3rem] ml-[4.5rem]'>{getAge(appointment.dob.split("T")[0])}</li>
                     <li className='w-[15rem] ml-[3.5rem]'>{appointment.user.email}</li>
-                    <li className='w-[6rem] ml-[2rem]'>{appointment.appointment[0].appointmentDate}</li>
-                    <li className='w-[6rem] ml-[8rem]'>{appointment.appointment[0].appointmentTime}</li>
+                    <li className='w-[6rem] ml-[2rem]'>{appointment.appointmentDate}</li>
+                    <li className='w-[6rem] ml-[8rem]'>{appointment.appointmentTime}</li>
                     <li className='w-[5rem] ml-[8rem]'>{appointment.country}</li>
-                    <Link to="/doctor-appointment"><LinkIcon className='text-red-600'/></Link>
+                    <Link to={`/doctor-appointment/${appointment._id}`}><LinkIcon className='text-green-600'/></Link>
+                    <button
+                    onClick={()=>handleAppointmentDelete(appointment._id)} 
+                    className=' ml-6'>
+                        <DeleteIcon className='text-red-600'/>
+                    </button>
                 </ul>
             ))
         }

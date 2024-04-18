@@ -15,6 +15,10 @@ import DoctorMeet from './components/DoctorMeet'
 import DoctorList from './components/DoctorList'
 import VideoAppComponent from './components/VideoAppComponent'
 import FindDoctor from './components/FindDoctor'
+import PaymentGateway from './components/PaymentGateway'
+import PaymentSuccess from './components/PaymentSuccess'
+import HealthBlog from './components/HealthBlog'
+import Specialist from './components/Specialist'
 
 
 function App() {
@@ -34,10 +38,14 @@ function App() {
           <Route path='/user-login' element={<UserLogin/>}></Route>
           <Route path='/features' element={<Feature/>}></Route>
           <Route path='/doctor-login' element={<DoctorLogin/>}></Route>
-          <Route path='/doctor-appointment' element={<DoctorMeet/>}></Route>
+          <Route path='/doctor-appointment/:id' element={<DoctorMeet/>}></Route>
           <Route path='/doctors' element={<DoctorList/>}></Route>
           <Route path='/video-consultant' element={<VideoAppComponent/>}></Route>
           <Route path='/find-doctor' element={<FindDoctor/>}></Route>
+          <Route path='/payment/:id' element={<PaymentGateway/>}></Route>
+          <Route path='/paymentsuccess' element={<PaymentSuccess/>}></Route>
+          <Route path='/articles' element={<HealthBlog/>}></Route>
+          <Route path='/specialist/:id' element={<Specialist/>}></Route>
         </Routes>
       </BrowserRouter>
   )

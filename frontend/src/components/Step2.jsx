@@ -1,5 +1,6 @@
 import React from 'react'
 import {TextField} from "@mui/material"
+import Heading from './Heading'
 
 const Step2 = ({ formData, setFormData, nextStep, prevStep }) => {
 
@@ -11,7 +12,8 @@ const Step2 = ({ formData, setFormData, nextStep, prevStep }) => {
 
   return (
     <div>
-        <div className='w-[60rem] flex justify-center items-center mt-[10rem] pt-5 pb-5 pr-5 pl-4 bg-gray-300 mx-auto'>
+        <Heading/>
+        <div className='w-[60rem] flex justify-center items-center mt-[7rem] pt-5 pb-5 pr-5 pl-4 bg-gray-300 mx-auto'>
             <div>
                 <h1 className="w-[30rem] text-4xl mr-[1rem] text-center text-blue-800">Write ur address...</h1>
             </div>
@@ -71,6 +73,17 @@ const Step2 = ({ formData, setFormData, nextStep, prevStep }) => {
                 type='number'
                 name='pinCode'
                 value={formData.pinCode || ''}
+                onChange={handleChange}
+                className="appearance-none block w-full bg-gray-300 text-black border border-gray-400 rounded py-4 px-4 leading-tight focus:outline-none focus:bg-gray-300 focus:border-sky-700 placeholder:text-gray-700"
+                />
+            </div>
+            <div>
+                <input
+                required
+                placeholder='Contact Number'
+                type='tel'
+                name='contactNumber'
+                value={formData.contactNumber || ''}
                 onChange={handleChange}
                 className="appearance-none block w-full bg-gray-300 text-black border border-gray-400 rounded py-4 px-4 leading-tight focus:outline-none focus:bg-gray-300 focus:border-sky-700 placeholder:text-gray-700"
                 />

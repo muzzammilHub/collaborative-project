@@ -3,23 +3,47 @@ import ChatComponent from './ChatComponent'
 import ChatApp from './ChatApp'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadUser } from '../actions/loadUser'
+import { useParams } from 'react-router-dom'
+import Heading from './Heading'
+import { loadLoginDoctor } from '../actions/loadDoctor'
+import MedicationIcon from '@mui/icons-material/Medication'
+import Loader from './Loader'
 
 const DoctorMeet = () => {
+    const {id} = useParams()
     const dispatch = useDispatch()
     const [openChat, setOpenChat] = useState(false)
+    const [content, setContent] = useState(
+      `Medicine List:
+      1. Medicine A - Dosage: ...
+      2. Medicine B - Dosage: ...
+  
+      Test List:
+      1. Test X
+      2. Test Y
+      `
+    )
 
-    const {user} = useSelector((store)=>store.user)
+    const {appointment} = useSelector((store)=>store.appointment)
+    const {doctor} = useSelector((store)=>store.doctor)
 
-    console.log("******",user)
+    // console.log("(((((((((",doctor.doctor.dob)
+
+    // console.log("appointment", appointment.user._id)
 
  
     useEffect(()=>{
-        dispatch(loadUser())
+        dispatch(loadUser(id))
+        dispatch(loadLoginDoctor())
     },[dispatch])
 
     const handleClick = ()=>{}
+    const handleContentChange = (e) => {
+      setContent(e.target.value);
+    }
 
     const getAge = (dob)=>{
+      console.log(dob)
         const dobArray = dob.split("-")
         const year = dobArray[0]
         const month = dobArray[1]
@@ -43,53 +67,60 @@ const DoctorMeet = () => {
         return age
 
     }
+
+    if(!doctor || !appointment)
+        return <Loader/>
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
-  <div className="bg-gray-300 rounded-md shadow-md p-6">
-    
-    <div className="text-2xl text-center font-bold mb-4">Patient Information</div>
-    
-    {user && user.length > 0 && user.map((u, i) => (
-      <div key={i} className="mb-6">
-        <ul className="pl-4">
-        <div className=' flex justify-between'>
-          <span className=' font-bold'>Name</span><li className="text-lg font-semibold mb-2">{u.firstName} {u.lastName}</li>
+    <div>
+      <Heading/>
+      { appointment && doctor && <div className='flex pl-4 pr-4'>
+    <div className='flex mx-auto flex-col mt-10 bg-slate-200 flex-[0.5] p-10 h-[35rem]'>
+      <ul className='flex justify-center items-center border-b border-b-slate-400'>
+        <MedicationIcon/>
+        <li className=' text-xl p-2'>Dr.{doctor.doctor.firstName} {doctor.doctor.lastName}</li>
+        {/* {doctor?.doctor?.educationHistory.map((edu, index)=>(
+          <li>{edu}</li>
+        ))} */}
+        <li className=' text-xl p-2'>{doctor.doctor.speciality}</li>
+      </ul> 
+
+      <ul className=' mt-10 mb-10 pl-12 pr-12'>
+        <div className='flex justify-between border-b border-b-slate-400 p-1'>
+          <p className=' font-semibold'>Patient name</p>
+          <li>{appointment.user.firstName} {appointment.user.lastName}</li>
         </div>
-        <div className=' flex justify-between'>
-          <span className=' font-bold'>Gender</span><li>{u.gender}</li>
+        <div className='flex justify-between border-b border-b-slate-400 p-1'>
+          <p className=' font-semibold'>Age</p>
+        <li>{getAge(appointment.user.dob)}Y</li>
         </div>
-        <div className=' flex justify-between'>
-          <span className=' font-bold'>Email</span><li>{u.user.email}</li>
+        <div className='flex justify-between border-b border-b-slate-400 p-1'>
+          <p className=' font-semibold'>Gender</p>
+        <li>{appointment.user.gender}</li>
         </div>
-        <div className=' flex justify-between'>
-          <span className=' font-bold'>Age</span><li>{getAge(u.user.dob)}</li>
+        <div className='flex justify-between border-b border-b-slate-400 p-1'>
+          <p className=' font-semibold'>Contact Number</p>
+        <li>{appointment.user.contactNumber}</li>
         </div>
-        <div className=' flex justify-between'>
-          <span className=' font-bold'>Street</span><li>{u.street}</li>
+        <div className='flex justify-between border-b border-b-slate-400 p-1'>
+          <p className=' font-semibold'>Appointment date</p>
+        <li>{appointment.user.appointmentDate}</li>
         </div>
-        <div className=' flex justify-between'>
-          <span className=' font-bold'>District</span><li>{u.district}</li>
-        </div> 
-        <div className=' flex justify-between'>
-          <span className=' font-bold'>State</span><li>{u.state}</li>
+        <div className='flex justify-between border-b border-b-slate-400 p-1'>
+          <p className=' font-semibold'>Appointment time</p>
+        <li>{appointment.user.appointmentTime}</li>
         </div>
-        <div className=' flex justify-between'>
-          <span className=' font-bold'>Pin Code</span><li>{u.pinCode}</li>
-        </div>
-        <div className=' flex justify-between'>
-          <span className=' font-bold'>Health Issue</span><li>{u.healthIssue}</li>
-        </div>
-        <div className=' flex justify-between'> 
-          <span className=' font-bold'>Appointment Date</span><li>{u.appointment[0].appointmentDate}</li>
-        </div>
-        <div className=' flex justify-between'>
-          <span className=' font-bold'>Appointment Time</span><li>{u.appointment[0].appointmentTime}</li>
-        </div>
-        </ul>
+      </ul>
+      <textarea
+        className=" p-4 border resize-none scrollbar-hide ml-10 mr-10 outline-none"
+        value={content}
+        onChange={handleContentChange}
+        placeholder="Start typing medicine..."
+      />
       </div>
-    ))}
-  </div>
-  <div className="bg-blue-500 rounded-md shadow-md p-6 text-white cursor-pointer" onClick={handleClick}>
+    </div>
+}
+  
+  <div className=" w-[40%] mx-auto" onClick={handleClick}>
     {openChat ? (
       <ChatApp setOpenChat={setOpenChat} />
     ) : (

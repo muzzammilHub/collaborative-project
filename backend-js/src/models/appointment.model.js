@@ -1,18 +1,14 @@
 import mongoose, {Schema} from "mongoose"
 
 const appointmentSchema = new Schema({
-    appointment: [
-        {
-            appointmentDate: {
-            type: String,
-            required: true
-        },
-        appointmentTime: {
-            type: String,
-            required: true
-        }
-    }
-    ],
+    appointmentDate: {
+        type: String,
+        required: true
+    },
+    appointmentTime: {
+        type: String,
+        required: true
+    },
     firstName: {
         type: String,
         required: true
@@ -52,6 +48,10 @@ const appointmentSchema = new Schema({
         type: Number,
         required: true
     },
+    contactNumber: {
+        type: Number,
+        required: true
+    },
     healthIssue: {
         type: String,
         required: true
@@ -63,6 +63,10 @@ const appointmentSchema = new Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    appointmentType:{
+        type: String,
+        required: true
     }
 })
 

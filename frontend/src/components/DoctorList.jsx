@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { loadDoctor } from "../actions/loadDoctor"
 import { Link } from 'react-router-dom'
 import InfoIcon from '@mui/icons-material/Info';
+import Heading from './Heading';
 
 const DoctorList = () => {
   const dispatch = useDispatch()
@@ -28,6 +29,7 @@ if(doctor){
     console.log("********",filteredDoctor)
   return (
     <div>
+      <Heading/>
     <div className=' flex justify-center items-center'>
       <input
           type="text"

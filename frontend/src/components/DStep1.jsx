@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import { TextField, InputLabel, MenuItem, Select } from '@mui/material'
 import BasicDateField from './BasicDateField'
+import Heading from './Heading'
 
 const DStep1 = ({nextStep, formData, setFormData}) => {
     
@@ -11,7 +12,8 @@ const DStep1 = ({nextStep, formData, setFormData}) => {
 
   return (
     <div>
-    <div className='w-[60rem] flex justify-center items-center mt-[10rem] pt-5 pb-5 pr-5 bg-gray-300 mx-auto'>  
+      <Heading/>
+    <div className='w-[60rem] flex justify-center items-center mt-[5rem] pt-5 pb-5 pr-5 bg-gray-300 mx-auto'>  
    <h2 className="w-[30rem] text-4xl mr-[1rem] text-center text-blue-800">What is your legal name, date of birth & gender?</h2>
    <form className="space-y-4 w-[30rem]">
      <div>

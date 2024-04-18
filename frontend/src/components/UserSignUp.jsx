@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import { TextField, Select, MenuItem, InputLabel} from "@mui/material"
+import Heading from './Heading';
 
 const UserSignUp = () => {
     const navigate = useNavigate()
@@ -21,9 +22,9 @@ const UserSignUp = () => {
 
       console.log(data)
 
-      // if(data){
-      //   navigate("/doctor")
-      // }
+      if(data){
+        navigate("/user-login")
+      }
 
     } catch (error) {
       console.log(error.message)
@@ -32,7 +33,8 @@ const UserSignUp = () => {
 
   return (
     <div>
-    <div className='w-[60rem] flex justify-center items-center mt-[5rem] pt-5 pb-5 pr-5 bg-gray-300 mx-auto'>  
+      <Heading/>
+    <div className='w-[60rem] flex justify-center items-center mt-[5rem] mb-[5rem] pt-5 pb-5 pr-5 bg-gray-300 mx-auto'>  
    <h2 className="w-[30rem] text-4xl mr-[1rem] text-center text-blue-800">User registeration form</h2>
    <form className="space-y-4 w-[30rem]"
    onSubmit={handleSubmit}

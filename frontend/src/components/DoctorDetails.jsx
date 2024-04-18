@@ -8,6 +8,7 @@ import Map from './Map'
 import SchoolIcon from '@mui/icons-material/School'
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital'
 import PinDropIcon from '@mui/icons-material/PinDrop'
+import Heading from './Heading'
 
 
 const DoctorDetails = () => {
@@ -50,7 +51,8 @@ const DoctorDetails = () => {
     }
 
   return (
-    <div className='pl-[3rem] pr-[3rem] bg-gray-400 h-auto'>
+    <div className='pl-[3rem] pr-[3rem] bg-gray-400 h-auto '>
+        <Heading/>
         <div className='shadow-2xl bg-white h-auto'>
         <div className='flex  p-4'>
             <div className='mr-4 w-[50%]'>
