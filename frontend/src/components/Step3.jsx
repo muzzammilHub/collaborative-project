@@ -2,20 +2,33 @@ import { useEffect, useState } from 'react'
 import { useParams } from "react-router-dom"
 import { MenuItem, Select, InputLabel } from '@mui/material'
 import axios from "axios"
+import {useDispatch, useSelector } from 'react-redux'
+import { loadAppointment } from '../actions/loadDoctor'
+import Heading from './Heading'
+import PaymentButton from './PaymentButton'
+import PaymentGateway from './PaymentGateway'
+
 
 const appointmentTime = ["10:00-10:20", "10:40-11:00", "11:20-11:40", "12:00-12:20", "12:40-1:00", "15:00-15:20", "15:40-16:00", "16:20-16:40", "17:20-18:00"]
 
 const Step3 = ({ formData, setFormData, prevStep }) => {
     const {id} = useParams()
+    const dispatch = useDispatch()
     console.log(formData)
+    const [paymentId, setPaymentId] = useState("")
+    const [invisible, setInvisible] = useState(false)
+   
+    const appointment = useSelector((store)=>store.appointment)
+
+    //console.log("appointment...", appointment)
+
     const handleChange = (e) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
     const numberOfDaysToShow = 7
     const [availableDates, setAvailableDates] = useState([]);
-  
-    useEffect(() => {
+    const findAvailableDates = ()=>{
       const currentDate = new Date();
       const availableDatesArray = [];
   
@@ -28,7 +41,36 @@ const Step3 = ({ formData, setFormData, prevStep }) => {
       }
   
       setAvailableDates(availableDatesArray);
-    }, [numberOfDaysToShow]);
+    }
+    let filtered = []
+
+    if(appointment){
+      filtered = appointment?.appointment?.filter((app)=>{
+         return appointmentTime.includes(app.appointmentTime) ? app.appointmentTime: null
+      }) 
+    }
+
+    //console.log("&&&&", filtered)
+    let filteredTime = []
+    if(filtered){
+      filtered?.map((f)=>{
+        filteredTime.push(f.appointmentTime)
+      })
+    }
+
+    //console.log("&&&&", filteredTime)
+
+    useEffect(() => {
+      dispatch(loadAppointment(id))
+      findAvailableDates()
+
+      
+      
+    }, []);
+
+    // const handleClick = ()=>{
+    //   setInvisible((prev)=>!prev)
+    // }
 
     const handleSubmit = async(e)=>{
       e.preventDefault()
@@ -40,8 +82,9 @@ const Step3 = ({ formData, setFormData, prevStep }) => {
                 Authorization: `Bearer ${localStorage.getItem('userToken')}`
               }
         })
-
-        console.log(data)
+        
+       console.log(data)
+       setInvisible((prev)=>!prev)
         
       } catch (error) {
         console.log(error)
@@ -50,7 +93,8 @@ const Step3 = ({ formData, setFormData, prevStep }) => {
   
     return (
         <div>
-        <div className='w-[60rem] flex justify-center items-center mt-[10rem] pt-5 pb-5 pr-5 pl-4 bg-gray-300 mx-auto'>  
+          <Heading/>
+        {!invisible ? <div className='w-[60rem] flex justify-center items-center mt-[6rem] pt-5 pb-5 pr-5 pl-4 bg-gray-300 mx-auto'>  
        <h2 className="w-[30rem] text-4xl mr-[1rem] text-center text-blue-800">Write about your current health issue.</h2>
        <form 
        className="space-y-4 w-[30rem]"
@@ -100,7 +144,7 @@ const Step3 = ({ formData, setFormData, prevStep }) => {
         >
             {
               appointmentTime.map((time, index)=>(
-                <MenuItem key={index} value={time}>{time}</MenuItem>
+                <MenuItem key={index} value={time}>{filteredTime.includes(time)? null : time}</MenuItem>
               ))
             }
             </Select>
@@ -113,15 +157,13 @@ const Step3 = ({ formData, setFormData, prevStep }) => {
            >
              back to prev
            </button>
+           {/* <PaymentButton appointmentType={formData.appointmentType==="Virtual Meet"? 199 : 500}/>  */}
            <button
-             type="submit"
-             className=" bg-blue-800 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-           >
-             Submit
-           </button>
+              className="bg-blue-800 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+              >Pay ₹{formData.appointmentType==="Virtual Meet"? 199 : 500}</button>
          </div>
        </form>
-       </div> 
+       </div>: <PaymentGateway formData={formData} />} 
      </div>
     );
   }

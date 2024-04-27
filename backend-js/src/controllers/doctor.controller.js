@@ -36,7 +36,7 @@ const doctorRegisteration = async(req, res)=>{
             lastName,
             email,
             password,
-            speciality,
+            speciality : speciality.charAt(0).toUpperCase() + speciality.slice(1),
             gender,
             dob,
             phoneNumber, 
@@ -223,7 +223,9 @@ const doctorLogin = async (req, res)=>{
 const getAllApointment = async (req, res)=>{
     try {
 
-        const doctor_id = req.doctor.id
+        const doctor_id = req.doctor?.id || req.query?.id
+
+        console.log("doctor_id", doctor_id)
 
         const instances = await Appointment
                                 .find({})
@@ -246,9 +248,7 @@ const getAllApointment = async (req, res)=>{
 
         return res.status(200).json({
             filteredData
-        })
-
-        return 
+        }) 
         
     } catch (error) {
         console.log("error: ", error)
@@ -278,12 +278,85 @@ const getDoctorList = async (req, res)=>{
     }
 }
 
+const findSpecialist = async (req, res)=>{
+    try {
+        
+        const {speciality} = req.body
+
+        const s = speciality.charAt(0).toUpperCase() + speciality.slice(1)
+
+        const ExistingSpecialist = await Doctor.find({speciality: s}).select("-password")
+
+        // console.log(isExistingDoctor)
+
+        if(!ExistingSpecialist){
+            return res.status(400).json({
+                message: "Specialist not found!!"
+            })
+        }
+
+        return res.status(200).json({
+            ExistingSpecialist
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            error
+        })
+    }
+}
+
+const getLoginDoctor = async(req, res)=>{
+    try {
+        
+        const doctor_id = req.doctor.id
+
+        const doctor = await Doctor.findById(doctor_id)
+
+        if(!doctor){
+            return res.status(400).json({
+                message: "Doctor not found!!"
+            })
+        }
+
+        return res.status(200).json({
+            doctor
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            error
+        })
+    }
+}
+
+const logoutDoctor = async(req, res)=>{
+    try {
+        
+        return res.status(200).cookie("doctorToken",null, {
+            expires: new Date(Date.now()), 
+            httpOnly: true
+        }).json({
+            success: true,
+            message: "successfully logout"
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            error
+        })
+    }
+}
+
 export {
+    findSpecialist,
     doctorRegisteration,
     findDoctor,
     getDoctorDetail,
     doctorLogin,
     imageUpload,
     getAllApointment,
-    getDoctorList
+    getDoctorList,
+    getLoginDoctor,
+    logoutDoctor
 }

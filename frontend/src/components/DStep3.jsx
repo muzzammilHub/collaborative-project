@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { TextField, Autocomplete } from '@mui/material'
 import axios from 'axios'
 import { useNavigate, Link} from 'react-router-dom'
+import Heading from './Heading'
 
 const medicalDegrees = [
     "Bachelor of Medicine, Bachelor of Surgery (MBBS)",
@@ -80,6 +81,7 @@ const DStep3 = ({nextStep, prevStep, formData, setFormData}) => {
 
   return (
     <div>
+      <Heading/>
     <div className='w-[60rem] flex justify-center items-center mt-[10rem] pt-5 pb-5 pr-5 bg-gray-300 mx-auto'>  
    <div>
    <h2 className="w-[30rem] text-4xl mr-[1rem] text-center text-blue-800">What is your legal name, date of birth & gender?</h2>

@@ -4,6 +4,7 @@ import DotLoader from "react-spinners/DotLoader"
 import {useDispatch} from "react-redux"
 import { addDoctor } from "../utils/doctorSlice"
 import { useNavigate } from "react-router-dom"
+import Heading from "./Heading"
 
 
 
@@ -26,12 +27,14 @@ const DiseasePrediction = () => {
 
             const response = await axios.post("http://127.0.0.1:4000/api/v1/user/disease-predict", {symptoms})
 
+            console.log(response.data.text)
+
             setLoader((prev)=>!prev)
 
-            const content = response?.data?.gptResponse?.choices[0]?.message
+            // const content = response?.data?.gptResponse?.choices[0]?.message
             
-            console.log("Response: ",content)
-            const structuredContent = content.content?.split("\n")
+            // console.log("Response: ",content)
+            const structuredContent = response?.data?.text?.split("\n")
             setContent(structuredContent)
 
             
@@ -62,14 +65,15 @@ const DiseasePrediction = () => {
         }
     }
 
-    // console.log(content)
+    console.log(content)
     const predictedDisease = content[0]?.split(",")
     const specialist = content[7] !== ""? content[7] : content[8]
     const formatting = specialist?.split(":")    
 
   return (
     <div>
-        <div className="container mx-auto p-4 w-[40rem]  shadow-lg rounded-lg bg-white">
+        <Heading/>
+        <div className="container mx-auto p-4 w-[40rem] mt-10  rounded-lg shadow-lg bg-white">
             <form onSubmit={handleSubmit} className="mb-4 flex items-center">
             
             <input

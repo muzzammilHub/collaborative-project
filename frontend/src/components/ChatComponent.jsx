@@ -9,7 +9,7 @@ const ChatComponent = ({setOpenChat}) => {
       onClick={handleClick}
       className=" flex items-center justify-center cursor-pointer w-[8rem] h-12 rounded bg-blue-800 text-white mx-auto"
     >
-       <p>Doctor Connect</p>
+       <p>Messaging</p>
     </div>
   )
 }

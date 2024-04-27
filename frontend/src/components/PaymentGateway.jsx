@@ -1,97 +1,76 @@
 // import DoctorImg from "./doctor.png";
 import useRazorpay from "react-razorpay"
+import Heading from "./Heading";
+import { useParams, useNavigate } from "react-router-dom";
+import { addpayment } from "../utils/paymetSlice";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 
-function PaymentGateway() {
-    const [Razorpay] = useRazorpay();
-    const amount = 500;
-    const currency = "INR";
-    const receiptid = "id1";
-
+function PaymentGateway({formData}) {
+    console.log("$$$$$$$$$$",formData)
+    // const {id} = useParams()
+    const amount = 199
     const paymentHandler = async (e) => {
         try {
 
             e.preventDefault();
 
-            const response = await fetch("http://localhost:4000/api/v1/user/payment",{
-                method: "POST",
-                body: JSON.stringify({
-                    amount,
-                    currency,
-                    receipt: receiptid,
-                }),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            const order = await response.json();
-            console.log(order);
+            const {data:{key}} = await axios.get("http://127.0.0.1:4000/api/getkey")
 
-            var options = {
-                "key": "rzp_test_ZVS6J7U6e45TIZ", // Enter the Key ID generated from the Dashboard
-                 amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-                 currency,
-                "name": "Acme Corp", //your business name
-                "description": "Test Transaction",
-                "image": "https://example.com/your_logo",
-                "order_id": order?.order?.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-                "handler": async function (response){
-                    console.log("response***********", response)
-                    const body = {
-                          ...response,
-                    };
+            const {data:{order}} = await axios.post("http://127.0.0.1:4000/api/v1/user/checkout",{
+                amount
+            })
 
-                    console.log("body*********", body)
-                    const validateRes = await fetch("http://localhost:4000/api/v1/user/order-validate",
-                        
-                        {
-                            method: "POST",
-                            body: JSON.stringify(body),
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                        }
-                    );
-                    const jsonRes = await validateRes.json();
-                    console.log(jsonRes);
+            const options = {
+                key, 
+                amount: order.amount,
+                currency: "INR",
+                name: "HealthChart",
+                description: "Test Transaction",
+                image: "https://example.com/your_logo",
+                order_id: order.id, 
+                callback_url: "http://127.0.0.1:4000/api/v1/user/paymentverification",
+                prefill: {
+                  name: "Muzzammil",
+                  email: "youremail@example.com",
+                  contact: "9999999999",
                 },
-                "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
-                    "name": "Ghiyas", //your customer's name
-                    "email": "ghiyas@example.com", 
-                    "contact": "900009570"  //Provide the customer's phone number for better conversion rates 
+                notes: {
+                  address: "Razorpay Corporate Office",
                 },
-                "notes": {
-                    "address": "Razorpay Corporate Office"
+                theme: {
+                  color: "#3399cc",
                 },
-                "theme": {
-                    "color": "#3399cc"
-                }
-            };
-            var rzp1 = new Razorpay(options)
-            rzp1.on('payment.failed', function (response){
-                    alert(response.error.code);
-                    alert(response.error.description);
-                    alert(response.error.source);
-                    alert(response.error.step);
-                    alert(response.error.reason);
-                    alert(response.error.metadata.order_id);
-                    alert(response.error.metadata.payment_id);
-            });
-            rzp1.open();
+              }
+
+              const razor = new window.Razorpay(options)
+              razor.open()
             
-
-            
-        } catch (error) {
-            console.log("error: " , error)
-        }
-    };
+        }catch (error) {
+            console.log(error)
+        } 
+    }
     return (
-        <div className="product">
-         <h2>Live Consultant</h2>
-         <p> Consult live with doctors </p>
-         {/* <img src={DoctorImg} /> */}
-         <br />
-         <button onClick={paymentHandler}>Buy Token</button>
-         </div>
+        <div>
+        <div className="flex items-center justify-center mt-[8rem]">
+            
+        <div className="payment-portal bg-gray-200 rounded p-8 shadow-md">
+          <h2 className="text-2xl font-bold mb-4">Live Consultant</h2>
+          <p className="text-gray-600 mb-4">Consult live with doctors</p>
+          <img
+            src="https://img.freepik.com/free-vector/people-walking-sitting-hospital-building-city-clinic-glass-exterior-flat-vector-illustration-medical-help-emergency-architecture-healthcare-concept_74855-10130.jpg?size=626&ext=jpg&ga=GA1.1.1395880969.1709683200&semt=sph"
+            alt="Doctor Image"
+            className="mb-4 h-[15rem]"
+          />
+          <button
+            className="bg-blue-800 text-white py-2 px-4 rounded hover:bg-blue-600"
+            onClick={paymentHandler}
+          >
+            Buy Token
+          </button>
+        </div>
+      </div>
+      </div>
          
     );
 }

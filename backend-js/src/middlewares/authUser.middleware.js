@@ -4,6 +4,8 @@ import { User } from "../models/user.model.js"
 const isAuthenticated = async (req, res, next)=>{
 
     try {
+
+        console.log("*****",req)
         
         const token = req.cookies?.userToken || req.header("Authorization")?.replace("Bearer ", "")
 
@@ -16,6 +18,8 @@ const isAuthenticated = async (req, res, next)=>{
         }
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
+
+        console.log(decoded)
 
         req.user = await User.findById(decoded._id)
 

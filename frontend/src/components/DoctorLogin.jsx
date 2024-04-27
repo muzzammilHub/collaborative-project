@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate} from 'react-router-dom'
 import axios from 'axios'
+import Heading from './Heading';
 
 const DoctorLogin = () => {
     const navigate = useNavigate()
@@ -28,6 +29,7 @@ const DoctorLogin = () => {
 
   return (
     <div>
+      <Heading/>
     <div className='w-[60rem] flex justify-center items-center mt-[10rem] pt-5 pb-5 pr-5 bg-gray-300 mx-auto'>  
    <h2 className="w-[30rem] text-4xl mr-[1rem] text-center text-blue-800">Write your email and password</h2>
    <form className="space-y-4 w-[30rem]"
