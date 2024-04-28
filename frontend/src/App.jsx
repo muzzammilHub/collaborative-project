@@ -44,7 +44,7 @@ function App() {
           <Route path='/find-doctor' element={<FindDoctor/>}></Route>
           <Route path='/payment/:id' element={<PaymentGateway/>}></Route>
           <Route path='/paymentsuccess' element={<PaymentSuccess/>}></Route>
-          <Route path='/articles' element={<HealthBlog/>}></Route>
+          <Route path='/health-blog' element={<HealthBlog/>}></Route>
           <Route path='/specialist/:id' element={<Specialist/>}></Route>
         </Routes>
       </BrowserRouter>

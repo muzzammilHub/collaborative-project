@@ -34,7 +34,7 @@ const DiseasePrediction = () => {
             // const content = response?.data?.gptResponse?.choices[0]?.message
             
             // console.log("Response: ",content)
-            const structuredContent = response?.data?.text?.split("\n")
+            const structuredContent = response?.data?.text
             setContent(structuredContent)
 
             
@@ -89,6 +89,7 @@ const DiseasePrediction = () => {
 
             {content && content.length > 0 && predictedDisease && formatting && formatting.length > 0 && (
             <div>
+                <p>{content}</p>
             <div className="mb-4">
                 <h2 className="text-xl font-semibold mb-2">Predicted Disease:</h2>
                 <ul>

@@ -91,7 +91,7 @@ const DoctorPannel = () => {
                     <li className='w-[10rem]'>{appointment.firstName} {appointment.lastName}</li>
                     <li className='w-[5rem] ml-[7rem]'>{appointment.gender}</li>
                     <li className='w-[3rem] ml-[4.5rem]'>{getAge(appointment.dob.split("T")[0])}</li>
-                    <li className='w-[15rem] ml-[3.5rem]'>{appointment.user.email}</li>
+                    <li className='w-[15rem] ml-[3.5rem]'>{appointment.user?.email}</li>
                     <li className='w-[6rem] ml-[2rem]'>{appointment.appointmentDate}</li>
                     <li className='w-[6rem] ml-[8rem]'>{appointment.appointmentTime}</li>
                     <li className='w-[5rem] ml-[8rem]'>{appointment.country}</li>

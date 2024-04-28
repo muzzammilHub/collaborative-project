@@ -64,7 +64,7 @@ const Heading = () => {
              onClick={handleClick}
              className={`mr-2 h-6 w-[5.4rem] rounded ${window.location.pathname === '/find-doctor' ? ' underline ' : 'hover:text-red-500'}`} to='/find-doctor'>Find Doctor</Link>
             <Link className={`mr-2 h-6 w-[7.8rem] rounded ${window.location.pathname === '/video-consultant' ? 'underline ' : 'hover:text-red-500'}`} to='/video-consultant'>Video Consultant</Link>
-            <Link className={`mr-2 h-6 w-[5.3rem] rounded ${window.location.pathname === '/articles' ? ' underline ' : 'hover:text-red-500'}`} to='/articles'>Health Blog</Link>
+            <Link className={`mr-2 h-6 w-[5.3rem] rounded ${window.location.pathname === '/health-blog' ? ' underline ' : 'hover:text-red-500'}`} to='/articles'>Health Blog</Link>
             <Link className={`mr-2 h-6 w-[9.5rem] rounded ${window.location.pathname === '/predict-disease' ? 'hover:text-red-500 underline ' : 'hover:text-red-500'}`} to='/predict-disease'>AI Disease Prediction</Link>
         </div>}
         {!localStorage.getItem("userToken") && !localStorage.getItem("doctorToken") && <div className='flex m-5'>
@@ -83,6 +83,7 @@ const Heading = () => {
         }
         {
            loginDoctor && localStorage.getItem("doctorToken") && <div className='flex items-center'>
+            <Link className= " text-white mr-3" to='/health-blog'>Health Blog</Link>
             {loginDoctor && <p className=' text-white mr-2'>{loginDoctor?.doctor?.doctor?.firstName} {loginDoctor?.doctor?.doctor?.lastName}</p>}
             <button 
                 onClick={handleLogOutDoctor}

@@ -14,7 +14,7 @@ const diseasePrediction = async(req, res)=>{
 
         console.log(symptoms)
 
-        const gptQuery = "Act as a symptom based disease prediction." + "Symptom is: " + symptoms + ". Give only five name of disease in a comma separated like for example:  Angina pectoris, Coronary artery disease, Heart attack (Myocardial infarction), Gastroesophageal reflux disease (GERD), Pleurisy. And Also give brief description of diseases in with comma(,) separated and in new line. And suggest one doctor specialist only name not their description at the end and in new line"
+        const gptQuery = `Give brief description about disease ${symptoms}`
 
         // const gptResponse = await openai.chat.completions.create({
         //     messages: [{ role: 'user', content: gptQuery }],
