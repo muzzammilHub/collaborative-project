@@ -42,6 +42,7 @@ const FindDoctor = () => {
             </div>
             </div>
         </div>
+        <div className='bg-black h-[9.8rem]'></div>
     </div>
   )
 }

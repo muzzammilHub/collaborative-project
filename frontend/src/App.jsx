@@ -32,7 +32,7 @@ function App() {
           <Route path='/doctor-recommendation' element={<DoctorRecommend/>}></Route>
           <Route path="/doctor/:id" element={<DoctorDetails/>}></Route>
           <Route path='/appointment/:id' element={<Appointment/>}></Route>
-          <Route path='/doctor-pannel' element={<DoctorPannel/>}></Route>
+          <Route path='/appointment-pannel' element={<DoctorPannel/>}></Route>
           <Route path='/doctor-register' element={<DoctorSignUp/>}></Route>
           <Route path='/user-register' element={<UserSignUp/>}></Route>
           <Route path='/user-login' element={<UserLogin/>}></Route>
@@ -46,6 +46,7 @@ function App() {
           <Route path='/paymentsuccess' element={<PaymentSuccess/>}></Route>
           <Route path='/health-blog' element={<HealthBlog/>}></Route>
           <Route path='/specialist/:id' element={<Specialist/>}></Route>
+          
         </Routes>
       </BrowserRouter>
   )

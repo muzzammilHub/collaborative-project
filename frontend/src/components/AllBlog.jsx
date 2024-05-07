@@ -13,6 +13,7 @@ const AllBlog = () => {
             const { data } = await axios.get("http://127.0.0.1:4000/api/v1/doctor/allblog");
             const { allBlog } = data
             setBlogContent(allBlog)
+            
         } catch (error) {
             console.log(error)
         }
@@ -38,10 +39,10 @@ const AllBlog = () => {
                     ))
                 ))}
             </div>}
-    {!isCard && <div className=" ml-[12rem] mx-auto bg-white shadow-md rounded-md p-6 my-4">
-        <div className="font-bold text-3xl text-center mb-4 text-orange-600">{content?.postCaption}</div>
+    {!isCard && <div className="ml-0 bg-white  p-6 my-4">
+        <div className="font-bold text-3xl text-center mb-[3rem] text-orange-600">{content?.postCaption}</div>
         <div className="mb-4 flex justify-center">
-            <img className=" rounded-md w-[60%] " src={content?.postThumbnail} alt="Thumbnail"  />
+            <img className=" rounded-md w-[100%] h-[30rem] " src={content?.postThumbnail} alt="Thumbnail"  />
         </div>
         <div className="text-gray-700 text-lg" dangerouslySetInnerHTML={{ __html: content?.postContent }} />
     </div>}

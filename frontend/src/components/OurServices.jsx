@@ -4,18 +4,18 @@ const OurServices = () => {
     return (
 <div>
   {/* Section for Finding a Doctor */}
-  <section className="py-16 bg-red-300">
+  <section className="py-16 bg-red-300 h-[80vh]">
     <div className="container mx-auto">
       {/* Feature 1 */}
       <div className="flex items-center">
-        <div className=" ml-20">
+        <div className="mt-[4rem] ml-[7rem]">
           <img
             src="https://res.cloudinary.com/do7fmmoau/image/upload/v1714211934/HealthApp/FindDoctor4.png"
             alt="Icon 1"
-            className=" text-white"
+            className="w-[20rem] text-white"
           />
         </div>
-        <div>
+        <div className=' ml-[10rem] mt-10'>
           <h3 className="text-2xl font-bold mb-2">Find Doctor</h3>
           <p className="text-lg">
             Discover a network of over 100,000 verified doctors on Lybrate.<br />
@@ -30,7 +30,7 @@ const OurServices = () => {
   </section>
 
   {/* Section for Appointing a Doctor */}
-  <section className="py-16 bg-green-300">
+  <section className="py-16 bg-green-300 h-[80vh]">
     <div className="container mx-auto">
       {/* Feature 2 */}
       <div className="flex items-center ml-40">
@@ -55,7 +55,7 @@ const OurServices = () => {
   </section>
 
   {/* Section for Video Consultation */}
-  <section className="py-16 bg-yellow-300">
+  <section className="py-16 bg-yellow-300 h-[80vh]">
     <div className="container mx-auto">
       {/* Feature 3 */}
       <div className="flex items-center">
@@ -66,7 +66,7 @@ const OurServices = () => {
             className=" text-white"
           />
         </div>
-        <div>
+        <div className=' mt-20'>
           <h3 className="text-2xl font-bold mb-2">Connect with a doctor no matter where you are</h3>
           <p className="text-lg">
             Connect with healthcare professionals through video consultations.<br />
@@ -80,7 +80,7 @@ const OurServices = () => {
   </section>
 
    {/* Section for Health Blog */}
-   <section className="py-16 bg-purple-300">
+   <section className="py-16 bg-purple-300 h-[80vh]">
     <div className="container mx-auto">
       {/* Feature 4 */}
       <div className="flex items-center">
@@ -96,7 +96,7 @@ const OurServices = () => {
           <img
             src="https://res.cloudinary.com/do7fmmoau/image/upload/v1710103772/HealthApp/HealthBlog.png"
             alt="Icon 4"
-            className="w-96 h-96 text-white float-right"
+            className="w-[28rem] h-[28rem] text-white float-right"
           />
         </div>
       </div>
@@ -104,8 +104,8 @@ const OurServices = () => {
   </section>
 
    {/* 2nd last bottom */}
-   <section className="py-16 relative">
-  <div className="absolute inset-0 flex justify-center items-center">
+   <section className=" relative">
+  <div className="  ">
     {/* Your image */}
     <img
       src="https://res.cloudinary.com/do7fmmoau/image/upload/v1713468486/HealthApp/2nd%20last_bottom.jpg"
@@ -115,7 +115,7 @@ const OurServices = () => {
   </div>
   
   {/* Your button */}
-  <div className="absolute inset-0 flex justify-center items-center">
+  <div className=" absolute top-[17rem] left-[44.68%]">
     <button className="bg-blue-500 text-white px-4 py-2 rounded-full">Download the app</button>
   </div>
 </section>

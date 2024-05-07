@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Heading from './Heading'
 import CreatePost from './CreatePost'
 import AllBlog from './AllBlog'
+import MyBlog from './MyBlog'
 
 const HealthBlog = () => {
 
@@ -13,7 +14,7 @@ const HealthBlog = () => {
     <div>
         <Heading/>
         <div className="flex">
-            <div className="w-1/10 p-4 bg-gray-200">
+            {localStorage.getItem("doctorToken") && <div className="w-1/10 p-4">
                 <div className="mb-4">
                     {!createPost ? (
                         <button
@@ -32,7 +33,7 @@ const HealthBlog = () => {
                               setCreatePost(!createPost)
                               setAllBlog(true)
                             }}
-                            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-[15rem]"
                         >
                             Close Create Post
                         </button>
@@ -63,14 +64,15 @@ const HealthBlog = () => {
                         </button>
                     )}
                 </div>
-                
-            </div>
+            </div>}
 
             {/* Main Content Section */}
-            <div className="w-4/5 p-4 bg-white">
+            <div className={`w-4/5 p-4 bg-white ${localStorage.getItem("doctorToken")? "ml-20" : " ml-40"}`}>
                 {/* Conditional Rendering: Create Post or My Blog */}
                 {createPost && <CreatePost />}
-                {myBlog && <div>{"Render  myblog content here..."}</div>}
+                {myBlog && <div>
+                  <MyBlog/>
+                  </div>}
                 {allBlog && 
                   <div>
                     <AllBlog/>

@@ -19,7 +19,7 @@ const DoctorLogin = () => {
       if(data){
         const {doctorToken} = data
         localStorage.setItem("doctorToken", doctorToken)
-        navigate("/doctor-pannel")
+        navigate("/appointment-pannel")
       }
 
     } catch (error) {

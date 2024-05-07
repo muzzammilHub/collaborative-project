@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import ReactQuill from "react-quill"
-import 'react-quill/dist/quill.snow.css';
-import axios from 'axios';
+import 'react-quill/dist/quill.snow.css'
+import axios from 'axios'
 
 const modules = {
     toolbar: [
@@ -29,9 +29,6 @@ const CreatePost = () => {
     const [ postThumbnail, setPostThumbnail] = useState(null)
     const [postContent, setPostContent] = useState("")
 
-    // console.log(caption)
-    // console.log(postContent)
-    // console.log(postThumbnail)
 
     const handleFormSubmit = async(e)=>{
         e.preventDefault()
@@ -51,19 +48,54 @@ const CreatePost = () => {
                 }
             })
 
+            alert("Post Created Successfully!!")
+
             console.log(data)
             
         } catch (error) {
+            alert("Post not Created!!")
             console.log(error.message)
         }
 
     }
 
+    const handelGenerateCaption = async()=>{
+        try {
+            
+            const { data } = await axios.post("http://127.0.0.1:4000/api/v1/doctor/getCaption", { postContent }, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("doctorToken")}`
+                }
+            })
+
+            const {text} = data
+
+            setPostCaption(text)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
   return (
-    <div className=" max-w-[50%] mx-auto h-auto bg-white shadow shadow-blue-700 rounded px-8 pt-6 pb-8 mb-4">
+    <div className=" max-w-[60%] mx-auto h-auto bg-white shadow shadow-blue-700 rounded px-8 pt-6 pb-8 mb-4 mt-28 ml-[8.5rem]">
     <form
      onSubmit={handleFormSubmit}
      className="space-y-4">
+            <ReactQuill
+            className=' border border-black'
+                modules={modules}
+                formats={formats}
+                value={postContent}
+                onChange={(value)=>setPostContent(value)}
+            />
+    <button
+    onClick={handelGenerateCaption}
+    className="relative bg-gradient-to-r from-red-500 to-yellow-500 hover:from-yellow-500 hover:to-red-500 text-black font-bold py-2 px-4 rounded transition-all duration-300"
+>
+    <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-transparent to-transparent rounded transition-all duration-300"></span>
+    Generate Caption
+</button>
         <input 
             className="appearance-none border border-black rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
             type='text'
@@ -72,14 +104,6 @@ const CreatePost = () => {
             value={postCaption}
             onChange={(e)=>setPostCaption(e.target.value)}
         />
-        
-            <ReactQuill
-            className=' border border-black'
-                modules={modules}
-                formats={formats}
-                value={postContent}
-                onChange={(value)=>setPostContent(value)}
-            />
         
         <div className="flex items-center justify-center">
             <label className="w-64 flex flex-col items-center  bg-white text-blue-500 rounded-lg shadow-lg tracking-wide uppercase border border-blue-500 cursor-pointer hover:bg-blue-500 hover:text-white">

@@ -1,5 +1,7 @@
 import { Post } from "../models/post.model.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.js"
+import { genAI } from "../utils/geminiai.js"
+
 
 const createPost = async(req, res)=>{
     try {
@@ -94,7 +96,60 @@ const getAllBlog = async(req, res)=>{
     }
 }
 
+const getAllMyBlog = async(req, res)=>{
+    try {
+
+        const doctor_id = req.doctor._id
+
+        const allMyBlog = await Post.find({doctor: doctor_id})
+
+        if(!allMyBlog){
+            return res.status(400).json({
+                message: "Don't find blog!!"
+            })
+        }
+
+        return res.status(200).json({
+            allMyBlog
+        })
+        
+    } catch (error) {
+        return res.status(500).json({
+            message: error
+        })
+    }
+}
+
+const getCaption = async(req, res)=>{
+    try {
+        
+        const { postContent } = req.body
+
+        
+
+        const geminiQuery = `Generate the caption in not more than 10 words from this paragraph: ${postContent}`
+
+        const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+      
+        const result = await model.generateContent(geminiQuery);
+        const response = result.response;
+        const text = response.text();
+        console.log(text);
+
+        return res.status(200).json({
+            text
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            message: error
+        })
+    }
+}
+
 export {
     createPost,
-    getAllBlog
+    getAllBlog,
+    getAllMyBlog,
+    getCaption
 }

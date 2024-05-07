@@ -6,8 +6,8 @@ const VideoAppComponent = () => {
   return (
     <div>
       <Heading/>
-      <div className=' bg-[#ffe6d0] h-[30rem] flex'>
-        <div className='w-[50%] mt-28 ml-20'>
+      <div className=' bg-[#ffe6d0] h-[41.1rem] flex'>
+        <div className='w-[50%] mt-[12rem] ml-20'>
           <h1 className=' font-semibold text-[3rem]'>Skip the travel!</h1>
           <h1 className=' font-semibold text-3xl'>Take Online Doctor Consultation</h1>
           <p className='mt-4 text-xl'> Private consultation +<span>Video Call</span></p>

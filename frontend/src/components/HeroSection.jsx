@@ -55,7 +55,7 @@ const Hero = () => {
 // </div>
 
 
-<div className="relative bg-blue-500 text-white h-screen flex items-center overflow-hidden">
+<div className="relative bg-[#02CCFE] text-black h-screen flex items-center overflow-hidden">
   <div className="absolute inset-0 z-10 bg-black opacity-40"></div>
   <div className="container mx-auto relative z-20">
     <div className="flex flex-col lg:flex-row items-center justify-center h-full">
@@ -66,7 +66,7 @@ const Hero = () => {
           Empowering you with access to quality healthcare<br />
           for a healthier and happier life.
         </p>
-        <button className="bg-white text-blue-500 px-8 py-4 rounded-full mt-6 hover:bg-blue-700 hover:text-white">
+        <button className=" text-white px-8 py-4 rounded-full mt-6 hover:bg-gray-400 bg-black hover:text-white">
           Get Started
         </button>
       </div>
@@ -76,7 +76,7 @@ const Hero = () => {
         <img
           src="https://res.cloudinary.com/do7fmmoau/image/upload/v1713443099/HealthApp/HeroSection1%20img.jpg"  // Replace with your image URL
           alt="Hero Image"
-          className="w-full h-full object-cover rounded-lg shadow-lg"
+          className="w-full h-full object-cover rounded"
         />
       </div>
     </div>
