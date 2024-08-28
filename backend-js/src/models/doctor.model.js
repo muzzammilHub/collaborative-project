@@ -64,9 +64,6 @@ const doctorSchema = new Schema({
     avatar:{
         type: String //cloudinary url
     },
-    rating: {
-        type: Number
-    }
 },
 {timestamps: true})
 

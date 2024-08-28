@@ -1,5 +1,6 @@
 import { Appointment } from "../models/appointment.model.js"
 import { Doctor } from "../models/doctor.model.js"
+import { Feedback } from "../models/feedback.model.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.js"
 
 const doctorRegisteration = async(req, res)=>{
@@ -116,9 +117,6 @@ const findDoctor = async(req, res)=>{
                 message: "Specialist not found!!"
             })
         }
-
-        console.log(Specialist)
-
         const matchedSpecialityDoctor = await Doctor.find({speciality: Specialist})
 
         if(!matchedSpecialityDoctor){
@@ -126,13 +124,9 @@ const findDoctor = async(req, res)=>{
                 message: "Not found doctor"
             })
         }
-
         return res.status(200).json({
             matchedSpecialityDoctor,
         })
-
-
-
     } catch (error) {
         return res.status(500).json({
             error:error?.message
@@ -348,6 +342,31 @@ const logoutDoctor = async(req, res)=>{
     }
 }
 
+
+const getFeedBack = async (req, res)=>{
+    try {
+        
+        const { id } = req.params 
+
+        console.log("*****************", id)
+
+        const feedback = await Feedback.find({doctor: id}).populate("user")
+
+        console.log("**************", feedback)
+
+        return res.status(200).json({
+            feedback
+        })
+
+    } catch (error) {
+        console.log("Error: ", error)
+
+        return res.status(500).json({
+            "message": "Internal server error"
+        })
+    }
+}
+
 export {
     findSpecialist,
     doctorRegisteration,
@@ -358,5 +377,6 @@ export {
     getAllApointment,
     getDoctorList,
     getLoginDoctor,
-    logoutDoctor
+    logoutDoctor,
+    getFeedBack
 }

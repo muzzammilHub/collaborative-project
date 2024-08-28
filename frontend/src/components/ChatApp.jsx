@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import { Button, Container, TextField, Typography } from "@mui/material";
 
 const ChatApp = ({setOpenChat}) => {
-  const socket = useMemo(() => io("http://127.0.0.1:5000/chat"), []);
+  const socket = useMemo(() => io("http://127.0.0.1:5000"), []);
   const [message, setMessage] = useState("");
   const [socketId, setSocketId] = useState("");
   const [room, setRoom] = useState("");

@@ -56,6 +56,9 @@ const appointmentSchema = new Schema({
         type: String,
         required: true
     },
+    paymentId: {
+        type: String
+    },
     doctor:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Doctor',

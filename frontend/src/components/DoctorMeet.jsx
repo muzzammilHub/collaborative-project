@@ -3,16 +3,13 @@ import ChatComponent from './ChatComponent'
 import ChatApp from './ChatApp'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadUser } from '../actions/loadUser'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Heading from './Heading'
 import { loadLoginDoctor } from '../actions/loadDoctor'
 import MedicationIcon from '@mui/icons-material/Medication'
 import Loader from './Loader'
 import generatePdfFromContent from '../actions/prescriptioinSend'
-import DotLoader from "react-spinners/DotLoader"
-import jsPDF from 'jspdf'
-import html2canvas from 'html2canvas'
-import axios from 'axios'
+
 
 
 const DoctorMeet = () => {
@@ -37,7 +34,9 @@ const DoctorMeet = () => {
     const {appointment} = useSelector((store)=>store.appointment)
     const {doctor} = useSelector((store)=>store.doctor)
 
-    console.log(appointment?.user?.user?.email)
+    // console.log("**************",appointment, doctor)
+
+    // console.log("app",appointment.user._id)
  
     useEffect(()=>{
         dispatch(loadUser(id))
@@ -80,9 +79,9 @@ const DoctorMeet = () => {
     const handlePreview = ()=>{
       setPreview(!preview)
     }
-    console.log("********",report.current)
+    // console.log("********",report.current)
 
-    const handleGeneratePdf = () => {
+    const handleGeneratePdf =  () => {
       setLoading(!loading)
       dispatch(generatePdfFromContent(report.current, 'output.pdf', appointment?.user?.user?.email));
     }
@@ -135,11 +134,12 @@ const DoctorMeet = () => {
         onChange={handleContentChange}
         placeholder="Start typing medicine..."
       />
-      <div className='flex mt-6'>
+      <div className='flex mt-6 items-center'>
       <button 
       onClick={handlePreview}
-      className='mt-5 border border-black w-[4rem] ml-10'>Preview</button>
+      className='mt-5 mr-4 border border-black w-[4rem] ml-10'>Preview</button>
       
+      <Link className={`mr-2 h-6 mt-5 rounded ${window.location.pathname === '/lobby' ? 'underline ' : 'hover:text-red-500'}`} to={`/lobby/${appointment.user._id}`}>Lobby</Link>
       </div>
       </div>
       
@@ -201,7 +201,7 @@ const DoctorMeet = () => {
       </button>
       </div>
       </div> 
-    </div>  : <div><DotLoader className=' mx-auto mt-[20rem]'/></div>
+    </div>  : <div><Loader setLoading={setLoading}/></div>
 }
   
   {/* <div className=" w-[40%] mx-auto" onClick={handleClick}>
@@ -212,7 +212,6 @@ const DoctorMeet = () => {
     )}
   </div> */}
 </div>
-
   )
 }
 

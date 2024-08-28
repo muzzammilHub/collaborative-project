@@ -1,19 +1,12 @@
-// import DoctorImg from "./doctor.png";
-import useRazorpay from "react-razorpay"
-import Heading from "./Heading";
-import { useParams, useNavigate } from "react-router-dom";
-import { addpayment } from "../utils/paymetSlice";
-import { useDispatch } from "react-redux";
-import axios from "axios";
+import axios from "axios"
 
-function PaymentGateway({formData}) {
-    console.log("$$$$$$$$$$",formData)
-    // const {id} = useParams()
+function PaymentGateway({formData, id}) {
+    console.log("id", id)
     const amount = 199
     const paymentHandler = async (e) => {
         try {
 
-            e.preventDefault();
+            e.preventDefault()
 
             const {data:{key}} = await axios.get("http://127.0.0.1:4000/api/getkey")
 
@@ -29,7 +22,7 @@ function PaymentGateway({formData}) {
                 description: "Test Transaction",
                 image: "https://example.com/your_logo",
                 order_id: order.id, 
-                callback_url: "http://127.0.0.1:4000/api/v1/user/paymentverification",
+                callback_url: `http://127.0.0.1:4000/api/v1/user/paymentverification?id=${id}`,
                 prefill: {
                   name: "Muzzammil",
                   email: "youremail@example.com",
@@ -71,8 +64,7 @@ function PaymentGateway({formData}) {
         </div>
       </div>
       </div>
-         
-    );
+    )
 }
 
-export default PaymentGateway;
+export default PaymentGateway

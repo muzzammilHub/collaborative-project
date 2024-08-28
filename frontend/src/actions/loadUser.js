@@ -26,3 +26,17 @@ export const loadUser = (user_id)=> async(dispatch)=>{
     }
 }
 
+export const loadSpecificAppointment = (user_id)=> async(dispatch)=>{
+    try {
+        const {data} = await axios.get("http://127.0.0.1:4000/api/v1/user/specific-appointment",{
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("userToken")}`
+            }
+        })
+        console.log("********",data)
+        dispatch(addAppointment(data))
+    } catch (error) {
+        console.error(error)
+    }
+}
+

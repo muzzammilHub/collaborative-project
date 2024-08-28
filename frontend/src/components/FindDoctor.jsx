@@ -21,16 +21,16 @@ const FindDoctor = () => {
         <Heading/>
         <div className='h-5 bg-black'></div>
         <div className=' h-[30rem] relative' style={{ backgroundImage: 'url("https://www.practostatic.com/web-assets/home/assets/images/homepage.06859593240c3efd483fe48951cfe6ff.svg")', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-            <div className=' absolute left-[22rem]'>
+            <div className=' absolute left-[32rem]'>
             <h1 className='text-center text-3xl pt-20 font-bold text-white'>Search Doctor and Book an Appointment</h1>
             <h1 className='font-semibold text-center mt-10 text-xl text-white'>Find and Book</h1>
             <div className=' flex justify-center'>
                 
-            <input
+            {/* <input
                 
                 className='w-[17rem] border p-3 m-0 focus:outline-none focus:border-black mt-2'
                 placeholder='➤ Type Location'
-            />
+            /> */}
             <input
                 onChange={(e)=>setSpeciality(e.target.value)}
                 className='w-[30rem] border p-3 m-0 focus:outline-none focus:border-black mt-2'

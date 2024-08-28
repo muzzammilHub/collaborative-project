@@ -1,11 +1,34 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import Heading from './Heading'
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CheckBoxIcon from '@mui/icons-material/CheckBox'
+import axios from "axios"
 
 const PaymentSuccess = () => {
     const searchQuery = useSearchParams()[0]
     const referenceNumber = searchQuery.get("reference")
+    const doctor_id = searchQuery.get("doctor_id")
+
+    const updateAppointment = async(referenceNumber)=>{
+      try {
+        
+        const {data} = await axios.post(`http://127.0.0.1:4000/api/v1/user/update-appointment?doctor_id=${doctor_id}`, {referenceNumber}, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("userToken")}`
+          }
+        })
+        
+        console.log(data)
+
+      } catch (error) {
+        console.log(`Error: ${error}`)
+      }
+    }
+
+    useEffect(()=>{
+      updateAppointment(referenceNumber)
+    }, [referenceNumber])
+
   return (
     <div className=' h-screen'>
         <Heading/>

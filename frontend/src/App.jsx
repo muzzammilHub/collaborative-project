@@ -19,6 +19,10 @@ import PaymentGateway from './components/PaymentGateway'
 import PaymentSuccess from './components/PaymentSuccess'
 import HealthBlog from './components/HealthBlog'
 import Specialist from './components/Specialist'
+import Lobby from './components/Lobby'
+import Room from './components/Room'
+import VideoMeetPage from './components/VideoMeetPage'
+import { Booking } from './components/Booking'
 
 
 function App() {
@@ -41,11 +45,14 @@ function App() {
           <Route path='/doctor-appointment/:id' element={<DoctorMeet/>}></Route>
           <Route path='/doctors' element={<DoctorList/>}></Route>
           <Route path='/video-consultant' element={<VideoAppComponent/>}></Route>
+          <Route path='/lobby/:id' element={<VideoMeetPage/>}></Route>
+          <Route path='/room/:id' element={<Room/>}></Route>
           <Route path='/find-doctor' element={<FindDoctor/>}></Route>
           <Route path='/payment/:id' element={<PaymentGateway/>}></Route>
           <Route path='/paymentsuccess' element={<PaymentSuccess/>}></Route>
           <Route path='/health-blog' element={<HealthBlog/>}></Route>
           <Route path='/specialist/:id' element={<Specialist/>}></Route>
+          <Route path='/booking' element={<Booking/>}></Route>
           
         </Routes>
       </BrowserRouter>

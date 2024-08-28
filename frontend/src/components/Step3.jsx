@@ -20,7 +20,6 @@ const Step3 = ({ formData, setFormData, prevStep }) => {
    
     const appointment = useSelector((store)=>store.appointment)
 
-    //console.log("appointment...", appointment)
 
     const handleChange = (e) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -50,7 +49,6 @@ const Step3 = ({ formData, setFormData, prevStep }) => {
       }) 
     }
 
-    //console.log("&&&&", filtered)
     let filteredTime = []
     if(filtered){
       filtered?.map((f)=>{
@@ -58,14 +56,9 @@ const Step3 = ({ formData, setFormData, prevStep }) => {
       })
     }
 
-    //console.log("&&&&", filteredTime)
-
     useEffect(() => {
       dispatch(loadAppointment(id))
       findAvailableDates()
-
-      
-      
     }, []);
 
     // const handleClick = ()=>{
@@ -163,7 +156,7 @@ const Step3 = ({ formData, setFormData, prevStep }) => {
               >Pay ₹{formData.appointmentType==="Virtual Meet"? 199 : 500}</button>
          </div>
        </form>
-       </div>: <PaymentGateway formData={formData} />} 
+       </div>: <PaymentGateway formData={formData} id={id}/>} 
      </div>
     );
   }

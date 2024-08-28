@@ -1,12 +1,11 @@
 import { transporter} from "../utils/transporter.js"
 
 const sendPdfByEmail = async(req, res) => {
-  const email = req.query.email
   
+  
+  const email = req.query.email
+  console.log("Email****", email)
   const pdf = req.file
-
-  console.log("*********", req.file)
-
 
   if (!pdf) {
     return res.status(400).json({
